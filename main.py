@@ -10,9 +10,7 @@ import math
 # search an unordered list L for a key x using iterate
 def isearch(L, x):
     ###TODO
-    def search_f(x, cur_output, next_input):
-        return next_input == x or cur_output
-    return iterate(lambda c,n: search_f(x, c, n), False, L)
+
     ###
 
 def test_isearch():
@@ -32,9 +30,7 @@ def iterate(f, x, a):
 # search an unordered list L for a key x using reduce
 def rsearch(L, x):
     ###TODO
-    def search_f(x, a, b):
-        return a==x or b==x or a is True or b is True
-    return reduce(lambda c,n: search_f(x, c, n), False, L)
+
     ###
 
 def test_rsearch():
@@ -117,10 +113,7 @@ def dedup(a, b):
     [1,2,3,4,5]
     """
     ###TODO
-    if a[-1] == b[0]:
-        return a[:-1] + b
-    else:
-        return a+b
+
     ###
     
 def doc_index_reduce(group):
@@ -137,7 +130,7 @@ def doc_index_reduce(group):
     ('is', [0,1,2])
     """
     # fix this line
-    return (group[0], group[1])
+    # return (group[0], group[1])
     ###TODO
     return (group[0], reduce(dedup, [], [[x] for x in group[1]]))
     ###
@@ -275,8 +268,7 @@ def parens_match_scan(mylist):
     
     """
     ###TODO
-    history, last = scan(plus, 0, list(map(paren_map, mylist)))
-    return last == 0 and reduce(min_f, 0, history) >= 0
+
     ###
 
 def scan(f, id_, a):
@@ -356,24 +348,12 @@ def parens_match_dc_helper(mylist):
     """
     ###TODO
     # Base cases
-    if len(mylist) == 0:
-        return [0,0]
-    elif len(mylist) == 1:
-        if mylist[0] == '(':
-            return (0, 1) # one unmatched (
-        elif mylist[0] == ')':
-            return (1, 0) # one unmatched )    
-        else:
-            return (0, 0)
-    i,j = parens_match_dc_helper(mylist[:len(mylist)//2])
-    k,l = parens_match_dc_helper(mylist[len(mylist)//2:])
+
+
     # Combination:
     # Return the tuple (R,L) using some combination of the values i,j,k,l defined above.
     # This should be done in constant time.
-    if j > k:
-        return (i, l + j - k)
-    else:
-        return (i + k - j, l)
+
     ###
     
 
