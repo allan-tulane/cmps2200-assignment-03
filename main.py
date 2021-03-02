@@ -132,7 +132,7 @@ def doc_index_reduce(group):
     # fix this line
     # return (group[0], group[1])
     ###TODO
-    return (group[0], reduce(dedup, [], [[x] for x in group[1]]))
+
     ###
     
 def test_dedup():
@@ -206,7 +206,7 @@ def parens_match_iterative(mylist):
     False
     """
     ### TODO
-    return iterate(parens_update, 0, mylist) == 0
+
     ###
 
 
@@ -223,17 +223,7 @@ def parens_update(current_output, next_input):
       the updated value of `current_output`
     """
     ###TODO
-    if current_output == -math.inf:  # in an invalid state; carry it forward
-        return current_output
-    if next_input == '(':            # new open parens 
-        return current_output + 1
-    elif next_input == ')':          # new close parens
-        if current_output <= 0:      # close before an open -> invalid
-            return -math.inf
-        else:                        # valid
-            return current_output - 1
-    else:                            # ignore non-parens input
-        return current_output
+
     ###
 
 
