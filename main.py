@@ -1,78 +1,61 @@
-import random, time
-import tabulate
+import math, queue
+from collections import Counter
 
-def ssort(L):
-    for i in range(len(L)):
-        #print(L)
-        m = L.index(min(L[i:]))
-        L[i], L[m] = L[m], L[i]
-    return L
+####### Problem 2 #######
 
-
-def qsort(a, pivot_fn):
-    ## TO DO
-    pass
+class TreeNode(object):
+    # we assume data is a tuple (frequency, character)
+    def __init__(self, left=None, right=None, data=None):
+        self.left = left
+        self.right = right
+        self.data = data
+    def __lt__(self, other):
+        return(self.data < other.data)
+    def children(self):
+        return((self.left, self.right))
     
-def time_search(sort_fn, mylist):
-    """
-    Return the number of milliseconds to run this
-    sort function on this list.
+def get_frequencies(fname):
+    f=open(fname, 'r')
+    C = Counter()
+    for l in f.readlines():
+        C.update(Counter(l))
+    return(dict(C.most_common()))
 
-    Note 1: `sort_fn` parameter is a function.
-    Note 2: time.time() returns the current time in seconds. 
-    You'll have to multiple by 1000 to get milliseconds.
+# given a dictionary f mapping characters to frequencies, 
+# create a prefix code tree using Huffman's algorithm
+def make_huffman_tree(f):
+    p = queue.PriorityQueue()
+    # construct heap from frequencies, the initial items should be
+    # the leaves of the final tree
+    for c in f.keys():
+        p.put(TreeNode(None,None,(f[c], c)))
 
-    Params:
-      sort_fn.....the search function
-      mylist......the list to search
-      key.........the search key 
+    # greedily remove the two nodes x and y with lowest frequency,
+    # create a new node z with x and y as children,
+    # insert z into the priority queue (using an empty character "")
+    while (p.qsize() > 1):
+        # TODO
+        
+    # return root of the tree
+    return p.get()
 
-    Returns:
-      the number of milliseconds it takes to run this
-      search function on this input.
-    """
-    start = time.time()
-    sort_fn(mylist)
-    return (time.time() - start) * 1000
-    ###
+# perform a traversal on the prefix code tree to collect all encodings
+def get_code(node, prefix="", code={}):
+    # TODO - perform a tree traversal and collect encodings for leaves in code
+    pass
 
-def compare_sort(sizes=[100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]):
-    """
-    Compare the running time of different sorting algorithms.
+# given an alphabet and frequencies, compute the cost of a fixed length encoding
+def fixed_length_cost(f):
+    # TODO
+    pass
 
-    Returns:
-      A list of tuples of the form
-      (n, linear_search_time, binary_search_time)
-      indicating the number of milliseconds it takes
-      for each method to run on each value of n
-    """
-    ### TODO - sorting algorithms for comparison
-    qsort_fixed_pivot = # 
-    qsort_random_pivot = #
-    tim_sort = #
-    result = []
-    for size in sizes:
-        # create list in ascending order
-        mylist = list(range(size))
-        # shuffles list if needed
-        #random.shuffle(mylist)
-        result.append([
-            len(mylist),
-            time_search(qsort_fixed_pivot, mylist),
-            time_search(qsort_random_pivot, mylist),
-        ])
-    return result
-    ###
+# given a Huffman encoding and character frequencies, compute cost of a Huffman encoding
+def huffman_cost(C, f):
+    # TODO
+    pass
 
-def print_results(results):
-    """ change as needed for comparisons """
-    print(tabulate.tabulate(results,
-                            headers=['n', 'qsort-fixed-pivot', 'qsort-random-pivot'],
-                            floatfmt=".3f",
-                            tablefmt="github"))
-
-def test_print():
-    print_results(compare_sort())
-
-random.seed()
-test_print()
+f = get_frequencies('f1.txt')
+print("Fixed-length cost:  %d" % fixed_length_cost(f))
+T = make_huffman_tree(f)
+C = get_code(T)
+print("Huffman cost:  %d" % huffman_cost(C, f))

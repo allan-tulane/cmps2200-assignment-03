@@ -1,41 +1,13 @@
 # CMPS 2200 Assignment 4
 
-In this assignment we'll look at randomness in computation, both in theory and in practice.
+In this assignment we'll look at randomness in computation, and huffman coding.
 
 **To make grading easier, please place all written solutions directly in `answers.md`, rather than scanning in handwritten work or editing this file.**
 
 All coding portions should go in `main.py` as usual.
 
 
-## Part 1: Deviation from Expectations
-
-We learned in lecture that Quicksort takes $O(n \log n)$ expected
-work. A fair question is how tight that expectation is. Luckily we
-have some bounds that allow us to look at this question. For a random
-variable $X$, Markov's inequality states that:
-
-$$\mathbf{P}[X \geq \alpha] \leq \frac{\mathbf{E}[X]}{\alpha}$$
-
-**1a)** What is the probability that Quicksort does $\Omega({n^2})$
-  comparisons? 
-.  
-.  
-**enter answers in `answers.md`**
-.  
-.  
-
-
-**1b)** What is the probability that Quicksort does $10^c n \ln n$
-comparisons, for a given $c>0$? What does this say about the
-"concentration" of the expected work for Quicksort?
-.  
-.  
-**enter answers in `answers.md`**
-.  
-.  
-
-
-## Part 2: From "Maybe" to "Definitely"
+## Part 1: From "Maybe" to "Definitely"
 
 At your new job designing
 algorithms for really hard problems, you're put to work solving
@@ -51,7 +23,7 @@ correct and a failure probability of $1-\epsilon$. Furthermore let
 $\mathcal{C}(\mathcal{A}(\mathcal{I}))$ denote the output of
 (deterministically) checking $\mathcal{A}$'s solution. 
 
-**2a)** You find that $\epsilon$ is too small to be reliable. You want to be able to have \emph{any} guaranteed success
+**1a)** You find that $\epsilon$ is too small to be reliable. You want to be able to have \emph{any} guaranteed success
   probability $\delta$, for $\epsilon<\delta<1$. Use $\mathcal{A}$ to
   construct an algorithm $\mathcal{A}'$, where
   $\mathcal{A}'(\mathcal{I}, \delta)$ is the correct output with
@@ -66,7 +38,7 @@ $\mathcal{C}(\mathcal{A}(\mathcal{I}))$ denote the output of
 .  
 .  
 
-**2b)** Your boss and co-workers are impressed, but you want to do
+**1b)** Your boss and co-workers are impressed, but you want to do
   even better. Show how to convert $\mathcal{A}$ into an
   algorithm that always produces the correct result, but has an
   expected runtime that depends on $W(n)$ and the success probability
@@ -78,49 +50,44 @@ $\mathcal{C}(\mathcal{A}(\mathcal{I}))$ denote the output of
 .  
 
 
-## Part 3: Determinism versus Randomization in Quicksort
+## Part 2: Fixed-Length vs. Variable-Length Codes
 
-In lecture we saw that adding a random choice of pivot reduced the
-probability of worst-case behavior for any given input in
-selection. Let's look at how pivot choices affect Quicksort. For this
-question, refer to the code in `main.py` 
+In class we looked at the Huffman coding algorithm for data
+compresssion. Let's implement the algorithm and look at its empirical
+performance on a dataset of 5 text files. 
 
-**3a)**
+**2a)** We have implemented a means to compute character frequencies
+  in a text file with the function `get_frequencies` in
+  `main.py`. Compute cost for a fixed length encoding for each text
+  file.
 
-Complete the implementations of `qsort` and `compare_sort` stubs. Feel
-free to take from code given in the lectures to  help you perform list
-partitioning. Note that the pivot choice function is input to `qsort`,
-so you will have to curry `qsort` to test different methods of
-choosing pivots. Implement variants of `qsort` that correspond to
-selecting the first element of the input list as the pivot, and to
-selecting a random pivot.
-.  
-.  
-.  
-.  
+**2b)** Complete the implementation of Huffman coding in
+  `make_huffman_tree`. Note that we manipulate binary trees in the
+  priority queue using the object `TreeNode`. Moreover, once the tree
+  is constructed, we must compute the actual encodings by traversing
+  the Huffman tree that has been constructed. To do this, complete the
+  implementation of `get_code`, which is a typical recursive binary
+  tree traversal. That is, given a tree node, we recursively visit the
+  left and right subtrees, appending a `0` or `1` to the encoding in
+  each direction as appropriate. If we visit a leaf of the tree (which
+  represents a character in the alphabet) we store the
+  collected encoding for that character in `code`.
+
+**2c)** Now implement `huffman_cost` to compute the cost of a Huffman
+  encoding for a character set with given frequencies.
+
+**2d)** Test your implementation of Huffman coding on the 5 given text
+files, and fill out a table of the encoding cost of each file for
+fixed-length and Huffman. Fill out a final column which gives the
+ratio of Huffman coding cost to fixed-length coding cost. Do you see a
+consistent trend? If so, what is it?
+
+**enter answer in `answers.md`**
 
 
-**3b)**
+**2e)** Suppose that we used Huffman coding on a document with alphabet $\Sigma$ in
+  which every character had the same frequency. What is the expected
+  cost of a Huffman encoding for the document? Is it consistent across
+  documents?
 
-Compare running times using `compare-qsort` between variants of
-Quicksort and the
-provided implementation of selection sort (`ssort`). Perform two
-different comparisons: a comparison between sorting methods using
-random permutations of the specified sizes, and a comparison using
-already sorted permutations. How do the running times compare to the
-asymptotic bounds? How does changing the type of input list change the
-relative performance of these algorithms? Note that you may have to
-modify the list sizes based on your system memory; compare at least 10
-different list sizes. The `print_results` function in `main.py` gives
-a table of results, but feel free to use code from Lab 1 to plot
-the results as well. 
-
-**enter answers in `answers.md`**
-
-**3c)**
-
-Python uses a sorting algorithm called [*Timsort*](https://en.wikipedia.org/wiki/Timsort), designed by Tim Peters. Compare the fastest of your sorting implementations to the Python
-sorting function `sorted`, conducting the tests in 3b above. 
-
-**enter answers in `answers.md`**
-
+**enter answer in `answers.md`**
