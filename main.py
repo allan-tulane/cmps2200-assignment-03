@@ -15,6 +15,8 @@ class TreeNode(object):
         return((self.left, self.right))
     
 def get_frequencies(fname):
+    ## This function is done.
+    ## Given any file name, this function reads line by line to count the frequency per character. 
     f=open(fname, 'r')
     C = Counter()
     for l in f.readlines():

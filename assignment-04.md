@@ -54,12 +54,12 @@ $\mathcal{C}(\mathcal{A}(\mathcal{I}))$ denote the output of
 
 In class we looked at the Huffman coding algorithm for data
 compresssion. Let's implement the algorithm and look at its empirical
-performance on a dataset of 5 text files. 
+performance on a dataset of 5 text files, which are `alice29.txt`, `asyoulik.txt`, `f1.txt`, `fields.c`, and `grammar.lsp`.
 
 **2a)** We have implemented a means to compute character frequencies
   in a text file with the function `get_frequencies` in
   `main.py`. Compute cost for a fixed length encoding for each text
-  file.
+  file in function `fixed_length_cost(f)` by calling function `get_frequencies`.
 
 **2b)** Complete the implementation of Huffman coding in
   `make_huffman_tree`. Note that we manipulate binary trees in the
