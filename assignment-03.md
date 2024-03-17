@@ -1,4 +1,4 @@
-# CMPS 2200 Assignment 4
+# CMPS 2200 Assignment 3
 
 In this assignment we'll look at the greedy and dynamic programming paradigms.
 
