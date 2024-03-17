@@ -1,8 +1,8 @@
-# CMPS 2200 Assignment 4
+# CMPS 2200 Assignment 3
 ## Answers
 
 **Name:**_________________________
 
 
-Place all written answers from `assignment-04.md` here for easier grading.
+Place all written answers from `assignment-03.md` here for easier grading.
 
