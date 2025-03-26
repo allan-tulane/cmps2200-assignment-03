@@ -78,7 +78,7 @@ algorithm in Python that was horribly inefficient.
 
 
 **3a)** The code for `MED` from the lecture notes is provided as a
-  starting point in `main.py.` Now implement `fast_MED`, a **top-down**
+  starting point in `main.py.` Now implement `fast_MED`, a **bottom-up**
   memoized version of `MED`. Test your implementation code using `test_MED`.
 
 
