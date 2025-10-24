@@ -18,7 +18,25 @@ def MED(S, T):
         else:
             return(1 + min(MED(S, T[1:]), MED(S[1:], T)))
 
-
+def med_top_down(S, T, MED={}):
+    ## look up the memory
+    if (S, T) in MED:
+        return MED[(S, T)]
+    ## base cases
+    if (S == ""):
+        return(len(T))
+    elif (T == ""):
+        return(len(S))
+    ## recursive cases
+    if S[0] == T[0]:  # If first characters are the same, move to the next
+        MED[(S, T)] = med_top_down(S[1:], T[1:], MED)
+    else:
+        insert = med_top_down(S, T[1:], MED) + 1  # Insert a character
+        delete = med_top_down(S[1:], T, MED) + 1  # Delete a character
+        MED[(S, T)] = min(insert, delete)
+    
+    return MED[(S, T)]
+    
 def fast_MED(S, T):
     # TODO -  implement top-down memoization
     pass
