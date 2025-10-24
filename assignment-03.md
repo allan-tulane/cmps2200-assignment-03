@@ -74,10 +74,10 @@ possible?
 
 In class we proved an optimal substructure property for the **Edit
 Distance** problem. This allowed us to implement a simple recursive
-algorithm in Python that was horribly inefficient.
+algorithm in Python that was horribly inefficient. **Please only consider insertion and deletion**.
 
 
-**3a)** The code for `MED` from the lecture notes is provided as a
+**3a)** The code for `MED` and `top-down MED` from the lecture notes is provided as a
   starting point in `main.py.` Now implement `fast_MED`, a **bottom-up**
   memoized version of `MED`. Test your implementation code using `test_MED`.
 
