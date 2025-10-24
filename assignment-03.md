@@ -84,7 +84,7 @@ algorithm in Python that was horribly inefficient. **Please only consider insert
 
 **3b)** Now that you have implemented an efficient algorithm for
   computing edit distance, let's turn to the problem of identifying
-  the actual edits between two sequences.
+  the actual edits between two sequences. **The given alignment is just one solution. If you algorithm outputs, still valid**.
 
  Notice that in the process of computing the optimal edit
   distance, we can also keep track of the actual sequence of edits to
